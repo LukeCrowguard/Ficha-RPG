@@ -226,8 +226,9 @@
     <div style="display: flex; gap: 10px;">
         <button class="btn" onclick="resetShort()">Descanso Curto</button>
         <button class="btn btn-danger" onclick="resetLong()">Descanso Longo</button>
-        <button class="btn" onclick="saveJSON()">💾 Salvar</button>
-        <button class="btn" onclick="document.getElementById('fileUp').click()">📂 Abrir</button>
+        <button class="btn" onclick="manualSave()">💾 Salvar</button>
+        <button class="btn" onclick="saveJSON()">📥 Exportar</button>
+        <button class="btn" onclick="document.getElementById('fileUp').click()">📂 Importar</button>
         <input type="file" id="fileUp" style="display:none" onchange="loadJSON(this)">
     </div>
 </div>
@@ -678,6 +679,12 @@
         document.querySelectorAll('.slot-bubble.used').forEach(el => data.slots.push(el.id));
         localStorage.setItem('dndSheetOfficial', JSON.stringify(data));
     }
+    
+    function manualSave() {
+        saveLocal();
+        alert("Ficha salva no navegador com sucesso!");
+    }
+
     function loadLocal() {
         const d = localStorage.getItem('dndSheetOfficial');
         if(d) applyData(JSON.parse(d));
